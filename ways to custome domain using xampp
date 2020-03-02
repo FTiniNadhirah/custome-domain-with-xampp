@@ -1,0 +1,40 @@
+
+Step 1:
+Go to: C:\Windows\System32\Drivers\etc\hosts
+And add this to the bottom of the file:
+
+=============
+127.0.0.1     your.domain.com
+=============
+
+Step 2:
+Go to [your XAMPP directory]/apache/conf/httpd-xampp.conf
+
+Step 3:
+Go to the bottom of the file and copy & paste this code:
+
+=============
+<VirtualHost *:80>
+   DocumentRoot "[PATH TO YOUR CUSTOM FOLDER]"
+   ServerName your.domain.com
+   
+   <Directory "[PATH TO YOUR CUSTOM FOLDER]">
+     Options Indexes FollowSymLinks Includes ExecCGI
+      AllowOverride All
+      Require all granted
+	</Directory>
+
+</VirtualHost>
+=============
+
+* Replace [PATH TO YOUR CUSTOM FOLDER] to the folder where your files are located.
+  Ex: C:/my/www/folder/
+* your.domain.com must be the same on Step 1 & Step 3
+
+
+Step 4:
+Stop Apache on XAMPP, wait for 5 seconds, then click "Start" to start again your Apache.
+
+
+If all things go well, you can go to your browser, type your.domain.com 
+and it will now happily point to your custom local folder.
